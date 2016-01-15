@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<style>
+	.well{
+		width: 700px;
+		margin: 0px auto;
+	}
+</style>
+
+<a href="/events">Events Dashboard</a>
+<form action="/logout" method="post">
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+<input type="hidden" name="_method" value="delete">
+<input type="submit" value="Logout" class="btn btn-default">
+</form>
+
+<h1><%= @event.name %></h1>
+<h4>Host: <%= @event.user.first_name %></h4>
+<h4>Date: <%= @event.date %></h4>
+<h4>Location: <%= @event.location.city %>, <%= @event.location.state %></h4>
+<h4>People who are joining the event: </h4>
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Location</th>
+		<th>State</th>
+	</tr>
+	<% @attend.each do |a| %>
+	<tr>
+		<td><%= a.user.first_name %> <%= a.user.last_name %></td>
+		<td><%= a.user.location.city %></td>
+		<td><%= a.user.location.state %></td>
+	</tr>
+	<% end %>
+</table>
+<div class="row">
+<div class="col-md-6">
+<h1>Discussion about this event:</h1>
+<div id="comments" style="overflow:scroll">
+	<% @comment.each do |c| %>
+	<p><%= c.user.first_name %> says <%= c.content %></p>
+	<% end %>
+</div>
+</div>
+<div class="col-md-6">
+<div class="well">
+<h3>Add Comment:</h3>
+<form action="/comment/<%= @event.id %>" method="post">
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+<textarea name="content" id="content" cols="50" rows="5"></textarea>
+<input type="submit" value="Submit Comments" class="btn btn-success">
+</form>
+</div>
+</div>
+</div>

@@ -1,0 +1,182 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<style>
+	.well{
+		width: 400px;
+		margin: 0px auto;
+	}
+</style>
+<a href="/show/<%= session[:user_id] %>">Edit My Profile</a>
+<form action="/logout" method="post">
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+<input type="hidden" name="_method" value="delete">
+<input type="submit" value="Logout" class="btn btn-default">
+</form>
+<h1>Welcome, <%= @user.first_name %></h1>
+<h3>Here are some of the events at your state:</h3>
+<table class="table">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Host</th>
+		<th>Action/Status</th>
+	</tr>
+	</thead>
+	<% @events.each do |e| %>
+		<% if e.location.state == @user.location.state %>
+		<tr>
+			<td><a href="/events/<%= e.id %>"><%= e.name %></a></td>
+			<td><%= e.date %></td>
+			<td><%= e.location.city %></td>
+			<td><%= e.user.first_name %></td>
+			<td>
+				<% if e.attendances.where(user: User.find(@user.id)).any? %>
+					<form action="/leave/<%= e.id %>" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type="hidden" name="_method" value="delete">
+					<input type="submit" value="Leave" class="btn btn-warning">
+					</form>
+				<% else %>
+					<form action="/join/<%= e.id %>" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type="submit" value="Join" class="btn btn-success">
+					</form>
+				<% end %>
+				<% if e.user_id == @user.id %>
+					<a href="/eupdate/<%= e.id %>"><button class="btn btn-primary">Edit</button></a>
+					<form action="/delete/<%= e.id %>" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+				<% end %>
+				<% if e.user_id == @user.id %>
+					<input type="hidden" name="_method" value="delete">
+					<input type="submit" value="Delete" class="btn btn-danger">
+					</form>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	<% end %>
+</table>
+<h3>Here are some of the events on other states:</h3>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>State</th>
+			<th>Host</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<% @events.each do |e| %>
+	<% if e.location.state != @user.location.state %>
+	<tr>
+		<td><a href="/events/<%= e.id %>"><%= e.name %></a></td>
+		<td><%= e.date %></td>
+		<td><%= e.location.city %></td>
+		<td><%= e.location.state %></td>
+		<td><%= e.user.first_name %></td>
+		<td>
+			<% if e.attendances.where(user: User.find(@user.id)).any? %>
+				<form action="/leave/<%= e.id %>" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type="hidden" name="_method" value="delete">
+					<input type="submit" value="Leave" class="btn btn-warning">
+				</form>
+			<% else %>
+				<form action="/join/<%= e.id %>" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type="submit" value="Join" class="btn btn-success">
+				</form>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+	<% end %>
+</table>
+
+<div class="well">
+<form action="/ecreate" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<h1 class="text-center">Add Event</h1>
+	<p>
+	<label for="name">Name:</label>
+	<input type="text" name="name" id="name" placeholder="Event name">
+	</p>
+	<p>
+	<label for="date">Date:</label>
+	<input type="date" name="date" id="date">
+	</p>
+	<p>
+	<label for="city">City:</label>
+	<input type="text" name="city" id="city">
+	</p>
+	<p>
+	<label for="state">State:</label>
+	<select name="state" id="state">
+		<option value="AL">AL</option>
+		<option value="AK">AK</option>
+		<option value="AZ">AZ</option>
+		<option value="AR">AR</option>
+		<option value="CA">CA</option>
+		<option value="CO">CO</option>
+		<option value="CT">CT</option>
+		<option value="DE">DE</option>
+		<option value="DC">DC</option>
+		<option value="FL">FL</option>
+		<option value="GA">GA</option>
+		<option value="HI">HI</option>
+		<option value="ID">ID</option>
+		<option value="IL">IL</option>
+		<option value="IN">IN</option>
+		<option value="IA">IA</option>
+		<option value="KS">KS</option>
+		<option value="KY">KY</option>
+		<option value="LA">LA</option>
+		<option value="ME">ME</option>
+		<option value="MD">MD</option>
+		<option value="MA">MA</option>
+		<option value="MI">MI</option>
+		<option value="MN">MN</option>
+		<option value="MS">MS</option>
+		<option value="MO">MO</option>
+		<option value="MT">MT</option>
+		<option value="NE">NE</option>
+		<option value="NV">NV</option>
+		<option value="NH">NH</option>
+		<option value="NJ">NJ</option>
+		<option value="NM">NM</option>
+		<option value="NY">NY</option>
+		<option value="NC">NC</option>
+		<option value="ND">ND</option>
+		<option value="OH">OH</option>
+		<option value="OK">OK</option>
+		<option value="OR">OR</option>
+		<option value="PA">PA</option>
+		<option value="RI">RI</option>
+		<option value="SC">SC</option>
+		<option value="SD">SD</option>
+		<option value="TN">TN</option>
+		<option value="TX">TX</option>
+		<option value="UT">UT</option>
+		<option value="VT">VT</option>
+		<option value="VA">VA</option>
+		<option value="WA">WA</option>
+		<option value="WV">WV</option>
+		<option value="WI">WI</option>
+		<option value="WY">WY</option>
+	</select>
+	</p>
+	<input type="submit" value="Add Event" class="btn btn-success">
+</form>
+<div id="msg">
+<% if flash.any? %>
+	<% flash[:errors].each do |f| %>
+	<li><%= f %></li>
+	<% end %>
+<% end %>
+</div>
+</div>
