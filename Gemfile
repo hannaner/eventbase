@@ -13,6 +13,7 @@ gem 'spring',        group: :development
 gem 'bcrypt', '~> 3.1.7'
 gem 'hirb'
 gem 'rails_12factor', group: :production
+gem 'passenger'
 
 group :test, :development do
   gem 'rspec-rails'
