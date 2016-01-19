@@ -4,8 +4,11 @@
 	body {
 		background-image: url("http://farm4.staticflickr.com/3623/3386397450_db4969290f_o.jpg");
 		background-size: 100%;
+		background-repeat: no-repeat;
+		opacity: 0.93;
 
 	}
+	
 	h1, h3{
 		font-family: Lobster;
 	}
@@ -13,35 +16,46 @@
 		color: white;
 	}
 	.container-fluid{
-		width: 800px;
+		width: 1000px;
+	}
+
+	#register_form, #login_form {
+		display: inline-block;
+		width: 450px;
 	}
 </style>
-<div class="container-fluid" >
+<div class="container-fluid">
+<br>
 <h1 class="text-primary text-center">Welcome to EventBase!</h1>
-<div class="row">
-	<div class="well col-md-6">
-<form action="/users/new" method="post">
+<br><br>
+
+<!-- <div class="row"> -->
+	<div id="register_form" class="well col-md-6" style="margin-right:10px;">
+<form action="/users/new" method="post" class="form-horizontal" role="form">
 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<h3>Register</h3>
+	<h3 align="center">Register</h3>
+	<br>
+	
 	<p>
-	<label for="first_name">First Name:</label>
-	<input type="text" name="first_name" id="first_name" placeholder="First name">
+		<label class="control-label" for="first_name">First Name:</label>
+			<input class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name">
+	</p>
+	
+	<p>
+	<label class="control-label" for="last_name">Last Name:</label>
+	<input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name">
 	</p>
 	<p>
-	<label for="last_name">Last Name:</label>
-	<input type="text" name="last_name" id="last_name" placeholder="Last name">
+	<label class="control-label" for="email">Email:</label>
+	<input class="form-control" type="text" name="email" id="email" placeholder="Email Address">
 	</p>
 	<p>
-	<label for="email">Email:</label>
-	<input type="text" name="email" id="email" placeholder="Email address">
+	<label class="control-label" for="city">City:</label>
+	<input class="form-control" type="text" name="city" id="city" placeholder="City">
 	</p>
 	<p>
-	<label for="city">City:</label>
-	<input type="text" name="city" id="city" placeholder="City">
-	</p>
-	<p>
-	<label for="state">State:</label>
-	<select name="state" id="state">
+	<label class="control-label" for="state">State:</label>
+	<select class="form-control" name="state" id="state">
 		<option value="AL">AL</option>
 		<option value="AK">AK</option>
 		<option value="AZ">AZ</option>
@@ -96,15 +110,17 @@
 	</select>
 	</p>
 	<p>
-	<label for="password">Password:</label>
-	<input type="password" name="password" id="password">
+	<label class="control-label" for="password">Password:</label>
+	<input class="form-control" type="password" name="password" id="password" placeholder="Password">
 	</p>
 	<p>*Password should be at least 8 characters</p>
 	<p>
-	<label for="cpassword">Confirm PW:</label>
-	<input type="password" name="cpassword" id="cpassword">
+	<label class="control-label" for="cpassword">Confirm PW:</label>
+	<input class="form-control" type="password" name="cpassword" id="cpassword" placeholder="Confirm Password">
 	</p>
-	<input type="submit" value="Register" class="btn btn-success">
+	<div class="text-right">
+		<input type="submit" value="Register" class="btn btn-success">
+	</div>
 </form>
 <div id="msg">
 <% if flash.any? %>
@@ -114,19 +130,22 @@
 <% end %>
 </div>
 </div>
-<div class="well col-md-6">
+<div id="login_form" class="well col-md-6">
 <form action="/login" method="post">
 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<h3>Login</h3>
+	<h3 align="center">Login</h3>
+	<br>
 	<p>
-	<label for="loginemail">Email:</label>
-	<input type="text" name="loginemail" id="loginemail">
+	<label class="control-label" for="loginemail">Email:</label>
+	<input class="form-control" type="text" name="loginemail" id="loginemail" placeholder="Email Address">
 	</p>
 	<p>
-	<label for="loginpass">Password:</label>
-	<input type="password" name="loginpass" id="loginpass">
+	<label class="control-label" for="loginpass">Password:</label>
+	<input class="form-control" type="password" name="loginpass" id="loginpass" placeholder="Password">
 	</p>
-	<input type="submit" value="Login" class="btn btn-success">
+	<div class="text-right">
+		<input type="submit" value="Login" class="btn btn-success">
+	</div>
 </form>
 <h4><%= session[:errors] %></h4>
 </div>
