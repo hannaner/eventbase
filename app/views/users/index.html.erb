@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
@@ -202,3 +203,159 @@
 	</div>
 
 </body>
+=======
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<style>
+	body {
+		background-image: url("http://farm4.staticflickr.com/3623/3386397450_db4969290f_o.jpg");
+		background-size: 100%;
+		background-repeat: no-repeat;
+		opacity: 0.93;
+
+	}
+	
+	h1, h3{
+		font-family: Lobster;
+	}
+	.text-primary{
+		color: white;
+	}
+	.container-fluid{
+		width: 1000px;
+	}
+
+	#register_form, #login_form {
+		display: inline-block;
+		width: 450px;
+	}
+</style>
+<div class="container-fluid">
+<br>
+<h1 class="text-primary text-center">Welcome to EventBase!</h1>
+<br><br>
+
+<!-- <div class="row"> -->
+	<div id="register_form" class="well col-md-6" style="margin-right:10px;">
+<form action="/users/new" method="post" class="form-horizontal" role="form">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<h3 align="center">Register</h3>
+	<br>
+	
+	<p>
+		<label class="control-label" for="first_name">First Name:</label>
+			<input class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name">
+	</p>
+	
+	<p>
+	<label class="control-label" for="last_name">Last Name:</label>
+	<input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name">
+	</p>
+	<p>
+	<label class="control-label" for="email">Email:</label>
+	<input class="form-control" type="text" name="email" id="email" placeholder="Email Address">
+	</p>
+	<p>
+	<label class="control-label" for="city">City:</label>
+	<input class="form-control" type="text" name="city" id="city" placeholder="City">
+	</p>
+	<p>
+	<label class="control-label" for="state">State:</label>
+	<select class="form-control" name="state" id="state">
+		<option value="AL">AL</option>
+		<option value="AK">AK</option>
+		<option value="AZ">AZ</option>
+		<option value="AR">AR</option>
+		<option value="CA">CA</option>
+		<option value="CO">CO</option>
+		<option value="CT">CT</option>
+		<option value="DE">DE</option>
+		<option value="DC">DC</option>
+		<option value="FL">FL</option>
+		<option value="GA">GA</option>
+		<option value="HI">HI</option>
+		<option value="ID">ID</option>
+		<option value="IL">IL</option>
+		<option value="IN">IN</option>
+		<option value="IA">IA</option>
+		<option value="KS">KS</option>
+		<option value="KY">KY</option>
+		<option value="LA">LA</option>
+		<option value="ME">ME</option>
+		<option value="MD">MD</option>
+		<option value="MA">MA</option>
+		<option value="MI">MI</option>
+		<option value="MN">MN</option>
+		<option value="MS">MS</option>
+		<option value="MO">MO</option>
+		<option value="MT">MT</option>
+		<option value="NE">NE</option>
+		<option value="NV">NV</option>
+		<option value="NH">NH</option>
+		<option value="NJ">NJ</option>
+		<option value="NM">NM</option>
+		<option value="NY">NY</option>
+		<option value="NC">NC</option>
+		<option value="ND">ND</option>
+		<option value="OH">OH</option>
+		<option value="OK">OK</option>
+		<option value="OR">OR</option>
+		<option value="PA">PA</option>
+		<option value="RI">RI</option>
+		<option value="SC">SC</option>
+		<option value="SD">SD</option>
+		<option value="TN">TN</option>
+		<option value="TX">TX</option>
+		<option value="UT">UT</option>
+		<option value="VT">VT</option>
+		<option value="VA">VA</option>
+		<option value="WA">WA</option>
+		<option value="WV">WV</option>
+		<option value="WI">WI</option>
+		<option value="WY">WY</option>
+	</select>
+	</p>
+	<p>
+	<label class="control-label" for="password">Password:</label>
+	<input class="form-control" type="password" name="password" id="password" placeholder="Password">
+	</p>
+	<p>*Password should be at least 8 characters</p>
+	<p>
+	<label class="control-label" for="cpassword">Confirm PW:</label>
+	<input class="form-control" type="password" name="cpassword" id="cpassword" placeholder="Confirm Password">
+	</p>
+	<div class="text-right">
+		<input type="submit" value="Register" class="btn btn-success">
+	</div>
+</form>
+<div id="msg">
+<% if flash.any? %>
+	<% flash[:errors].each do |f| %>
+	<li><%= f %></li>
+	<% end %>
+<% end %>
+</div>
+</div>
+<div id="login_form" class="well col-md-6">
+<form action="/login" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<h3 align="center">Login</h3>
+	<br>
+	<p>
+	<label class="control-label" for="loginemail">Email:</label>
+	<input class="form-control" type="text" name="loginemail" id="loginemail" placeholder="Email Address">
+	</p>
+	<p>
+	<label class="control-label" for="loginpass">Password:</label>
+	<input class="form-control" type="password" name="loginpass" id="loginpass" placeholder="Password">
+	</p>
+	<div class="text-right">
+		<input type="submit" value="Login" class="btn btn-success">
+	</div>
+</form>
+<h4><%= session[:errors] %></h4>
+</div>
+
+</div>
+</div>
+>>>>>>> b12626bac323f5660747b2428ab31732b0f43726
