@@ -1,135 +1,204 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-<style>
-	body {
-		background-image: url("http://farm4.staticflickr.com/3623/3386397450_db4969290f_o.jpg");
-		background-size: 100%;
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Eventbase">
+	<meta name="author" content="Charles Kim and Hanna Kim">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+	<style>
+		body {
+			background-image: url("http://farm4.staticflickr.com/3623/3386397450_db4969290f_o.jpg");
+			background-size: 100%;
+			background-repeat: no-repeat;
+			opacity: 0.92;
 
-	}
-	h1, h3{
-		font-family: Lobster;
-	}
-	.text-primary{
-		color: white;
-	}
-	.container-fluid{
-		width: 800px;
-	}
-</style>
-<div class="container-fluid" >
-<h1 class="text-primary text-center">Welcome to EventBase!</h1>
-<div class="row">
-	<div class="well col-md-6">
-<form action="/users/new" method="post">
-	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<h3>Register</h3>
-	<p>
-	<label for="first_name">First Name:</label>
-	<input type="text" name="first_name" id="first_name" placeholder="First name">
-	</p>
-	<p>
-	<label for="last_name">Last Name:</label>
-	<input type="text" name="last_name" id="last_name" placeholder="Last name">
-	</p>
-	<p>
-	<label for="email">Email:</label>
-	<input type="text" name="email" id="email" placeholder="Email address">
-	</p>
-	<p>
-	<label for="city">City:</label>
-	<input type="text" name="city" id="city" placeholder="City">
-	</p>
-	<p>
-	<label for="state">State:</label>
-	<select name="state" id="state">
-		<option value="AL">AL</option>
-		<option value="AK">AK</option>
-		<option value="AZ">AZ</option>
-		<option value="AR">AR</option>
-		<option value="CA">CA</option>
-		<option value="CO">CO</option>
-		<option value="CT">CT</option>
-		<option value="DE">DE</option>
-		<option value="DC">DC</option>
-		<option value="FL">FL</option>
-		<option value="GA">GA</option>
-		<option value="HI">HI</option>
-		<option value="ID">ID</option>
-		<option value="IL">IL</option>
-		<option value="IN">IN</option>
-		<option value="IA">IA</option>
-		<option value="KS">KS</option>
-		<option value="KY">KY</option>
-		<option value="LA">LA</option>
-		<option value="ME">ME</option>
-		<option value="MD">MD</option>
-		<option value="MA">MA</option>
-		<option value="MI">MI</option>
-		<option value="MN">MN</option>
-		<option value="MS">MS</option>
-		<option value="MO">MO</option>
-		<option value="MT">MT</option>
-		<option value="NE">NE</option>
-		<option value="NV">NV</option>
-		<option value="NH">NH</option>
-		<option value="NJ">NJ</option>
-		<option value="NM">NM</option>
-		<option value="NY">NY</option>
-		<option value="NC">NC</option>
-		<option value="ND">ND</option>
-		<option value="OH">OH</option>
-		<option value="OK">OK</option>
-		<option value="OR">OR</option>
-		<option value="PA">PA</option>
-		<option value="RI">RI</option>
-		<option value="SC">SC</option>
-		<option value="SD">SD</option>
-		<option value="TN">TN</option>
-		<option value="TX">TX</option>
-		<option value="UT">UT</option>
-		<option value="VT">VT</option>
-		<option value="VA">VA</option>
-		<option value="WA">WA</option>
-		<option value="WV">WV</option>
-		<option value="WI">WI</option>
-		<option value="WY">WY</option>
-	</select>
-	</p>
-	<p>
-	<label for="password">Password:</label>
-	<input type="password" name="password" id="password">
-	</p>
-	<p>*Password should be at least 8 characters</p>
-	<p>
-	<label for="cpassword">Confirm PW:</label>
-	<input type="password" name="cpassword" id="cpassword">
-	</p>
-	<input type="submit" value="Register" class="btn btn-success">
-</form>
-<div id="msg">
-<% if flash.any? %>
-	<% flash[:errors].each do |f| %>
-	<li><%= f %></li>
-	<% end %>
-<% end %>
-</div>
-</div>
-<div class="well col-md-6">
-<form action="/login" method="post">
-	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<h3>Login</h3>
-	<p>
-	<label for="loginemail">Email:</label>
-	<input type="text" name="loginemail" id="loginemail">
-	</p>
-	<p>
-	<label for="loginpass">Password:</label>
-	<input type="password" name="loginpass" id="loginpass">
-	</p>
-	<input type="submit" value="Login" class="btn btn-success">
-</form>
-<h4><%= session[:errors] %></h4>
-</div>
+		}
 
-</div>
-</div>
+		h1, h3{
+			font-family: Lobster;
+		}
+
+		/*#box-1 {
+			width: auto;
+			height: auto;
+		}*/
+
+		.text-primary{
+			color: white;
+		}
+
+		.container-fluid{
+			width: 1000px;
+			padding-left: 70px;
+		}
+
+		#register_form, #login_form {
+			display: inline-block;
+			width: 450px;
+		}
+
+		#register_form, #login_form, h3 {
+			margin-top: 0px;
+		}
+
+		.footer p {
+		   color: #C8C8C8;
+		   font-size: 14px;
+		   font-weight: 10px;
+		   padding: 25px 0;
+		   height: 50px;
+		   text-transform: uppercase;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<br>
+		<h1 class="text-primary text-center" style="font-size:50px">Welcome to EventBase!</h1>
+		<br>
+		<div id="box-1">
+			<div id="register_form" class="well col-md-6" style="margin-right:10px;">
+				<form action="/users/new" method="post" class="form-horizontal" role="form">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<h3 align="center">Register</h3>
+					<br>
+			
+				<p>
+					<label class="control-label" for="first_name">First Name:</label>
+						<input class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name">
+				</p>
+				
+				<p>
+					<label class="control-label" for="last_name">Last Name:</label>
+					<input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name">
+				</p>
+
+				<p>
+					<label class="control-label" for="email">Email:</label>
+					<input class="form-control" type="text" name="email" id="email" placeholder="Email Address">
+				</p>
+
+				<p>
+					<label class="control-label" for="city">City:</label>
+				<input class="form-control" type="text" name="city" id="city" placeholder="City">
+				</p>
+
+				<p>
+					<label class="control-label" for="state">State:</label>
+					<select class="form-control" name="state" id="state">
+						<option value="AL">AL</option>
+						<option value="AK">AK</option>
+						<option value="AZ">AZ</option>
+						<option value="AR">AR</option>
+						<option value="CA">CA</option>
+						<option value="CO">CO</option>
+						<option value="CT">CT</option>
+						<option value="DE">DE</option>
+						<option value="DC">DC</option>
+						<option value="FL">FL</option>
+						<option value="GA">GA</option>
+						<option value="HI">HI</option>
+						<option value="ID">ID</option>
+						<option value="IL">IL</option>
+						<option value="IN">IN</option>
+						<option value="IA">IA</option>
+						<option value="KS">KS</option>
+						<option value="KY">KY</option>
+						<option value="LA">LA</option>
+						<option value="ME">ME</option>
+						<option value="MD">MD</option>
+						<option value="MA">MA</option>
+						<option value="MI">MI</option>
+						<option value="MN">MN</option>
+						<option value="MS">MS</option>
+						<option value="MO">MO</option>
+						<option value="MT">MT</option>
+						<option value="NE">NE</option>
+						<option value="NV">NV</option>
+						<option value="NH">NH</option>
+						<option value="NJ">NJ</option>
+						<option value="NM">NM</option>
+						<option value="NY">NY</option>
+						<option value="NC">NC</option>
+						<option value="ND">ND</option>
+						<option value="OH">OH</option>
+						<option value="OK">OK</option>
+						<option value="OR">OR</option>
+						<option value="PA">PA</option>
+						<option value="RI">RI</option>
+						<option value="SC">SC</option>
+						<option value="SD">SD</option>
+						<option value="TN">TN</option>
+						<option value="TX">TX</option>
+						<option value="UT">UT</option>
+						<option value="VT">VT</option>
+						<option value="VA">VA</option>
+						<option value="WA">WA</option>
+						<option value="WV">WV</option>
+						<option value="WI">WI</option>
+						<option value="WY">WY</option>
+					</select>
+				</p>
+
+				<p>
+					<label class="control-label" for="password">Password:</label>
+					<input class="form-control" type="password" name="password" id="password" placeholder="Password">
+				</p>
+
+				<p>*Password should be at least 8 characters</p>
+				
+				<p>
+					<label class="control-label" for="cpassword">Confirm PW:</label>
+					<input class="form-control" type="password" name="cpassword" id="cpassword" placeholder="Confirm Password">
+				</p>
+
+				<div class="text-right">
+					<input type="submit" value="Register" class="btn btn-success">
+				</div>
+				</form>
+
+				<div id="msg">
+					<% if flash.any? %>
+						<% flash[:errors].each do |f| %>
+						<li><%= f %></li>
+						<% end %>
+					<% end %>
+				</div>
+
+			</div>
+
+			<div id="login_form" class="well col-md-6">
+				<form action="/login" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<h3 align="center">Login</h3>
+					<br>
+					<p>
+						<label class="control-label" for="loginemail">Email:</label>
+						<input class="form-control" type="text" name="loginemail" id="loginemail" placeholder="Email Address">
+					</p>
+					<p>
+						<label class="control-label" for="loginpass">Password:</label>
+						<input class="form-control" type="password" name="loginpass" id="loginpass" placeholder="Password">
+					</p>
+					<div class="text-right">
+						<input type="submit" value="Login" class="btn btn-success">
+					</div>
+				</form>
+				<h4><%= session[:errors] %></h4>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="container text-center">
+			<p>&copy; Eventbase 2015</p>
+		</div>
+	</div>
+
+</body>
